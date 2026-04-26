@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlos Lungaretti — Diseño Industrial & Matricería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #111111;
+  --white:   #f9f7f2;
+  --lime:    #c8f135;
+  --lime-dk: #a3cc15;
+  --gray:    #e2dfd8;
+  --mid:     #888880;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Nunito', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--mono);
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* ─── TEXTURA DE RUIDO ─── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: .25;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ─── NAVEGACIÓN ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--black); display: flex; justify-content: space-between; align-items: center;
+  padding: .9rem 2.5rem; border-bottom: 2px solid var(--lime);
+}
+.nav-logo { font-family: var(--mono); font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--lime); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; text-decoration: none; color: var(--white); transition: color .2s; }
+.nav-links a:hover { color: var(--lime); }
+
+/* ─── HERO ─── */
+.hero { min-height: 100vh; background: var(--black); display: grid; grid-template-columns: 1.1fr 1fr; padding-top: 3.5rem; }
+.hero-left { padding: 5rem 3rem 4rem; display: flex; flex-direction: column; justify-content: center; border-right: 2px dashed #333; position: relative; }
+.hero-name { font-family: var(--sans); font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 900; line-height: 1; color: var(--white); text-transform: uppercase; }
+.hero-name span { color: var(--lime); display: block; }
+.hero-bio { font-size: .7rem; line-height: 2.2; color: #aaa; max-width: 42ch; border-left: 2px solid var(--lime); padding-left: 1rem; margin-top: 1.5rem; }
+
+/* ─── PESTAÑAS (TABS) ─── */
+#trabajos { background: var(--gray); padding: 5rem 2.5rem; }
+.tabs-nav { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+.tab-btn {
+  background: var(--black); color: var(--white); border: 2px solid var(--black);
+  padding: .8rem 1.5rem; font-family: var(--mono); font-size: .65rem; font-weight: 700;
+  text-transform: uppercase; cursor: pointer; transition: all .3s;
+}
+.tab-btn.active { background: var(--lime); color: var(--black); border-color: var(--lime); }
+
+.tab-content { display: none; }
+.tab-content.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+
+.galeria-item { background: var(--white); padding: 1rem; border: 2px solid var(--black); display: flex; flex-direction: column; gap: 0.8rem; }
+.galeria-media { width: 100%; height: 280px; object-fit: cover; border: 1px solid #333; background: #000; user-select: none; -webkit-user-drag: none; }
+img.galeria-media { pointer-events: none; }
+.galeria-caption { font-family: var(--mono); font-size: .65rem; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
+.galeria-caption::before { content: '◆'; color: var(--lime-dk); }
+
+/* ─── CONTACTO Y RESEÑAS ─── */
+.contact-section { padding: 5rem 2.5rem; background: var(--white); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid var(--black); }
+.contact-left { padding: 3rem; background: var(--black); color: var(--white); }
+.contact-right { padding: 3rem; }
+
+.form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .5rem; }
+.form-group label { font-size: .55rem; text-transform: uppercase; color: var(--mid); letter-spacing: .1em; }
+.form-group input, .form-group textarea {
+  background: transparent; border: none; border-bottom: 2px solid var(--black);
+  padding: .5rem 0; font-family: var(--mono); font-size: .75rem; outline: none;
+}
+.btn-submit {
+  background: var(--black); color: var(--lime); border: 2px solid var(--black);
+  padding: 1rem 2rem; font-weight: 700; text-transform: uppercase; cursor: pointer;
+  width: 100%; transition: .3s;
+}
+.btn-submit:hover { background: var(--lime); color: var(--black); }
+
+/* ─── SECCIÓN DE RESEÑAS ─── */
+#resenas { padding: 5rem 2.5rem; background: var(--black); color: var(--white); }
+.resenas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.resena-card { background: #1a1a1a; padding: 2rem; border-left: 4px solid var(--lime); position: relative; }
+.resena-text { font-size: .75rem; font-style: italic; line-height: 1.8; color: #ccc; margin-bottom: 1.5rem; }
+.resena-user { font-weight: 700; font-size: .6rem; text-transform: uppercase; color: var(--lime); letter-spacing: .1em; }
+
+/* ─── ANIMACIONES ─── */
+.fade-up { opacity: 0; transform: translateY(20px); transition: .6s ease-out; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Lungaretti.design</a>
+  <ul class="nav-links">
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow" style="color:var(--lime); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;">Diseño Industrial & Matricería</p>
+    <h1 class="hero-name">Carlos<br><span>Lungaretti</span></h1>
+    <p class="hero-bio">Especialista en I+D, modelado técnico y fabricación de moldes. +15 años transformando conceptos en productos industriales.</p>
+  </div>
+  <div class="hero-right" style="padding: 5rem; display:flex; align-items:center; justify-content:center;">
+    <div style="border: 2px solid var(--lime); padding: 2rem; color: var(--white); text-align:center;">
+        <span style="font-size:3rem; font-weight:900; color:var(--lime);">+15</span>
+        <p style="font-size:.6rem; text-transform:uppercase; letter-spacing:.2em;">Años de experiencia</p>
+    </div>
+  </div>
+</section>
+
+<section id="trabajos">
+  <div class="section-header fade-up">
+    <h2 class="section-title" style="font-family:var(--sans); font-size:2.5rem; text-transform:uppercase; margin-bottom:2rem;">Portfolio Técnico</h2>
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(event, 'renders')">Renders</button>
+      <button class="tab-btn" onclick="openTab(event, 'simulaciones')">Simulaciones</button>
+      <button class="tab-btn" onclick="openTab(event, 'moldes')">Moldes y Matrices</button>
+    </div>
+  </div>
+
+  <div id="renders" class="tab-content active">
+    <div class="galeria-item"><img src="1.32.jpg" class="galeria-media"><p class="galeria-caption">Diseño de pieza — SolidWorks</p></div>
+    <div class="galeria-item"><img src="1.40.jpg" class="galeria-media"><p class="galeria-caption">Modelado Industrial</p></div>
+    <div class="galeria-item"><img src="1.103.jpg" class="galeria-media"><p class="galeria-caption">Detalle Técnico</p></div>
+    <div class="galeria-item"><img src="1.104.jpg" class="galeria-media"><p class="galeria-caption">Matricería Vista Superior</p></div>
+    <div class="galeria-item"><img src="1.119.jpg" class="galeria-media"><p class="galeria-caption">Render Componente</p></div>
+    <div class="galeria-item"><img src="ultimo4.jpg" class="galeria-media"><p class="galeria-caption">Panel PastaPro 300</p></div>
+  </div>
+
+  <div id="simulaciones" class="tab-content">
+    <div class="galeria-item"><img src="animacion.gif" class="galeria-media"><p class="galeria-caption">Simulación de Proceso</p></div>
+    <div class="galeria-item"><video controls loop muted class="galeria-media" controlsList="nodownload"><source src="colada_c.mp4"></video><p class="galeria-caption">Análisis de Colada</p></div>
+    <div class="galeria-item"><video controls loop muted class="galeria-media" controlsList="nodownload"><source src="cam_c.mp4"></video><p class="galeria-caption">Mecanizado CAM</p></div>
+    <div class="galeria-item"><video controls loop muted class="galeria-media" controlsList="nodownload"><source src="Nueva matriz para manijas.mp4"></video><p class="galeria-caption">Matriz Manijas — SW</p></div>
+    <div class="galeria-item"><img src="Animación del llenado.gif" class="galeria-media"><p class="galeria-caption">Llenado de Molde</p></div>
+  </div>
+
+  <div id="moldes" class="tab-content">
+    <div class="galeria-item"><img src="20240718_092125.jpg" class="galeria-media"><p class="galeria-caption">Matriz de Precisión</p></div>
+    <div class="galeria-item"><img src="20250424_141932.jpg" class="galeria-media"><p class="galeria-caption">Puesta a punto Molde</p></div>
+    <div class="galeria-item"><img src="img1.jpeg" class="galeria-media"><p class="galeria-caption">Montaje de Matriz</p></div>
+    <div class="galeria-item"><video controls loop muted class="galeria-media" controlsList="nodownload"><source src="20250424_141845.mp4"></video><p class="galeria-caption">Proceso de Inyección</p></div>
+  </div>
+</section>
+
+<section id="contacto" class="contact-section">
+  <div class="contact-grid">
+    <div class="contact-left">
+        <h2 style="font-family:var(--sans); font-size:2rem; text-transform:uppercase; margin-bottom:2rem;">¿Tenés un proyecto?</h2>
+        <p style="font-size:.7rem; color:#888;">Dejame tu consulta técnica o una reseña sobre mi trabajo.</p>
+    </div>
+    <div class="contact-right">
+      <form action="https://formspree.io/f/carloslungaretti@gmail.com" method="POST" id="reviewForm">
+        <div class="form-group">
+          <label>Nombre de Usuario / Empresa</label>
+          <input type="text" name="username" required placeholder="Ej: Juan Pérez">
+        </div>
+        <div class="form-group">
+          <label>Tu Comentario / Reseña</label>
+          <textarea name="comment" rows="4" required placeholder="Escribí aquí tu mensaje..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <p class="section-eyebrow" style="color:var(--lime); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; text-align:center;">Testimonios</p>
+  <h2 style="font-family:var(--sans); font-size:2.5rem; text-transform:uppercase; text-align:center; margin-top:1rem;">Reseñas de Clientes</h2>
+  
+  <div class="resenas-grid" id="resenasList">
+    <div class="resena-card fade-up">
+      <p class="resena-text">"Excelente trabajo en el desarrollo de la matriz para la PastaPro 300. Gran capacidad de resolución técnica."</p>
+      <p class="resena-user">Oficina Técnica - Pastalinda</p>
+    </div>
+    <div class="resena-card fade-up">
+      <p class="resena-text">"Los renders y simulaciones de inyección nos permitieron ahorrar meses de pruebas en planta."</p>
+      <p class="resena-user">Ing. de Producto</p>
+    </div>
+  </div>
+</section>
+
+<footer style="background: var(--black); color: #444; padding: 2rem; text-align: center; border-top: 2px solid var(--lime);">
+  <p style="font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;">© 2026 Carlos Lungaretti — Lomas de Zamora, Buenos Aires</p>
+</footer>
+
+<script>
+// Función para cambiar entre pestañas
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tab-content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tab-btn");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "grid";
+  evt.currentTarget.className += " active";
+}
+
+// Animación de aparición (Scroll Reveal)
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
