@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlos Lungaretti — Diseño Industrial & Matricería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #111111;
+  --white:   #f9f7f2;
+  --lime:    #c8f135;
+  --lime-dk: #a3cc15;
+  --gray:    #e2dfd8;
+  --mid:     #888880;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Nunito', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--mono);
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* ─── TEXTURA DE RUIDO ─── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: .25;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ─── NAVEGACIÓN ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--black); display: flex; justify-content: space-between; align-items: center;
+  padding: .9rem 2.5rem; border-bottom: 2px solid var(--lime);
+}
+.nav-logo { font-family: var(--mono); font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--lime); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; text-decoration: none; color: var(--white); transition: color .2s; }
+.nav-links a:hover { color: var(--lime); }
+
+/* ─── HERO ─── */
+.hero { min-height: 100vh; background: var(--black); display: grid; grid-template-columns: 1.1fr 1fr; padding-top: 3.5rem; border-bottom: 2px solid var(--lime); }
+.hero-left { padding: 5rem 3rem 4rem; display: flex; flex-direction: column; justify-content: center; border-right: 2px dashed #333; position: relative; }
+.hero-name { font-family: var(--sans); font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 900; line-height: 1; color: var(--white); text-transform: uppercase; }
+.hero-name span { color: var(--lime); display: block; }
+.hero-bio { font-size: .7rem; line-height: 2.2; color: #aaa; max-width: 42ch; border-left: 2px solid var(--lime); padding-left: 1rem; margin-top: 1.5rem; }
+
+/* ─── SOBRE MÍ ─── */
+#sobre-mi { padding: 5rem 2.5rem; background: var(--white); }
+.section-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 3.5rem; border-bottom: 2px solid var(--black); padding-bottom: 1rem; }
+.section-title { font-family: var(--sans); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; text-transform: uppercase; color: var(--black); }
+.sobre-mi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.sobre-mi-text { font-size: .75rem; line-height: 2.2; color: #333; max-width: 60ch; }
+.sobre-mi-skills { border-left: 2px solid var(--lime); padding-left: 2rem; }
+.skill-item { font-size: .6rem; text-transform: uppercase; color: var(--mid); letter-spacing: .1em; margin-bottom: .8rem; display: flex; align-items: center; gap: .5rem; }
+.skill-item::before { content: '→'; color: var(--lime-dk); }
+
+/* ─── TICKER ─── */
+.ticker { background: var(--lime); color: var(--black); padding: .7rem 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--black); border-top: 2px solid var(--black); }
+.ticker-inner { display: inline-flex; gap: 2.5rem; animation: ticker 25s linear infinite; }
+.ticker-item { font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─── PESTAÑAS (TABS) Y GALERÍA ─── */
+#trabajos { background: var(--gray); padding: 5rem 2.5rem; }
+.tabs-nav { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+.tab-btn {
+  background: var(--black); color: var(--white); border: 2px solid var(--black);
+  padding: .8rem 1.5rem; font-family: var(--mono); font-size: .65rem; font-weight: 700;
+  text-transform: uppercase; cursor: pointer; transition: all .3s;
+}
+.tab-btn.active { background: var(--lime); color: var(--black); border-color: var(--lime); }
+
+.tab-content { display: none; }
+.tab-content.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+
+/* ─── ESTILOS DE MEDIOS Y SELLO DE AGUA ─── */
+.galeria-item { background: var(--white); padding: 1rem; border: 2px solid var(--black); display: flex; flex-direction: column; gap: 0.8rem; }
+
+/* Contenedor relativo para el sello */
+.galeria-media-wrapper { 
+  position: relative; width: 100%; height: 280px; overflow: hidden; 
+  border: 1px solid #333; background: #000; 
+}
+.galeria-media { 
+  width: 100%; height: 100%; object-fit: cover; 
+  user-select: none; -webkit-user-drag: none; 
+}
+img.galeria-media { pointer-events: none; }
+
+/* El Sello de Agua */
+.watermark {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  color: rgba(200, 241, 53, 0.35); /* Var lime con opacidad */
+  font-family: var(--mono); font-size: 2.2rem; font-weight: 700;
+  letter-spacing: .3em; text-transform: uppercase;
+  pointer-events: none; /* Crucial: no interrumpe clics/play */
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.galeria-caption { font-family: var(--mono); font-size: .65rem; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
+.galeria-caption::before { content: '◆'; color: var(--lime-dk); }
+
+/* ─── EXPERIENCIA (LÍNEA DE TIEMPO) ─── */
+#experiencia { padding: 5rem 2.5rem; background: var(--white); }
+.exp-item { display: grid; grid-template-columns: 180px 1fr; border-bottom: 1px dashed #ccc; padding: 2.5rem 0; }
+.exp-dates { font-size: .65rem; color: var(--mid); text-align: right; padding-right: 2.5rem; }
+.exp-dates strong { display: block; color: var(--lime-dk); margin-bottom: .2rem; font-size: .75rem; }
+.exp-content { padding-left: 2rem; border-left: 1px solid #eee; }
+.exp-role { font-family: var(--sans); font-size: 1.1rem; font-weight: 800; text-transform: uppercase; color: var(--black); }
+.exp-desc { font-size: .7rem; line-height: 2.1; color: #444; max-width: 65ch; margin-top: .5rem; }
+.tag { font-size: .55rem; background: var(--gray); color: var(--black); padding: .3rem .7rem; border-radius: 2px; margin-right: 5px; display: inline-block; margin-top: 5px; text-transform: uppercase; font-weight: 700; }
+.tag.lime { background: var(--lime); }
+
+/* ─── CONTACTO (AJAX) ─── */
+.contact-section { padding: 5rem 2.5rem; background: var
