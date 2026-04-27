@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlos Lungaretti — Diseño Industrial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#111;--white:#f9f7f2;--lime:#c8f135;--lime-dk:#a3cc15;--gray:#e2dfd8;--mid:#888880;--mono:'Space Mono',monospace;--sans:'Nunito',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--black);font-family:var(--mono);overflow-x:hidden;cursor:crosshair}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--black);display:flex;justify-content:space-between;align-items:center;padding:.8rem 2.5rem;border-bottom:2px solid var(--lime)}
+.nav-logo{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:var(--white);transition:color .2s}
+.nav-links a:hover{color:var(--lime)}
+
+/* TRADUCTOR */
+.lang-btn{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:var(--lime);color:var(--black);border:none;padding:.35rem .9rem;cursor:pointer;border-radius:2px;transition:background .2s}
+.lang-btn:hover{background:var(--lime-dk)}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--black);display:grid;grid-template-columns:1.1fr 1fr;padding-top:3.5rem}
+.hero-left{padding:5rem 3rem 4rem;display:flex;flex-direction:column;justify-content:center;border-right:2px dashed #333;position:relative}
+.deco-star{position:absolute;color:var(--lime);font-size:1.4rem;line-height:1;animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.deco-star.s1{top:5rem;right:2rem}
+.deco-star.s2{bottom:8rem;left:1.5rem;font-size:1rem;animation-duration:12s}
+.hero-eyebrow{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--lime);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.hero-eyebrow::before{content:'';display:inline-block;width:2rem;height:2px;background:var(--lime)}
+.hero-name{font-family:var(--sans);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1;letter-spacing:-.02em;color:var(--white);text-transform:uppercase;margin-bottom:.5rem}
+.hero-name span{color:var(--lime);display:block}
+.hero-badge{display:inline-flex;align-items:center;background:var(--lime);color:var(--black);font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.45rem 1rem;margin:1.2rem 0 1.8rem;border-radius:2px}
+.hero-bio{font-size:.7rem;line-height:2.2;letter-spacing:.04em;color:#aaa;max-width:42ch;border-left:2px solid var(--lime);padding-left:1rem}
+.hero-contacts{margin-top:2rem;display:flex;flex-direction:column;gap:.6rem}
+.hero-ci{display:flex;align-items:center;gap:.75rem;font-size:.62rem;letter-spacing:.08em;color:#888}
+.hero-ci .ic{width:20px;height:20px;background:#222;border:1px solid #444;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;border-radius:3px}
+.hero-cta{margin-top:2.5rem;display:inline-flex;align-items:center;gap:1rem;font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--black);background:var(--lime);padding:.85rem 1.8rem;border:2px solid var(--lime);font-weight:700;transition:background .2s,color .2s;width:fit-content}
+.hero-cta:hover{background:transparent;color:var(--lime)}
+.hero-cta::after{content:' →'}
+.hero-right{padding:5rem 3rem 4rem;display:flex;flex-direction:column;justify-content:center;gap:1.5rem}
+.stats-box{border:2px solid var(--lime);padding:1.5rem;position:relative;background:#161616}
+.stats-box-label{position:absolute;top:-10px;left:1rem;background:var(--lime);color:var(--black);font-size:.55rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:2px 8px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.5rem}
+.stat-item{text-align:center}
+.stat-num{font-family:var(--sans);font-size:2rem;font-weight:900;color:var(--lime);display:block;line-height:1}
+.stat-label{font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#666;margin-top:.3rem;display:block}
+.skills-preview{border:2px dashed #333;padding:1.5rem;background:#0d0d0d}
+.skills-preview-title{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:1rem}
+.skill-bar-row{display:flex;align-items:center;gap:1rem;margin-bottom:.8rem}
+.skill-bar-name{font-size:.6rem;color:#ccc;letter-spacing:.04em;width:120px;flex-shrink:0}
+.skill-bar-track{flex:1;height:4px;background:#333;position:relative}
+.skill-bar-fill{position:absolute;left:0;top:0;height:100%;background:var(--lime)}
+.skill-level{font-size:.55rem;color:#555;width:60px;text-align:right;text-transform:uppercase;letter-spacing:.06em}
+
+/* TICKER */
+.ticker{background:var(--lime);color:var(--black);padding:.7rem 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-flex;gap:2.5rem;animation:ticker 22s linear infinite}
+.ticker-item{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:5rem 2.5rem}
+.section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:3.5rem;border-bottom:2px solid var(--black);padding-bottom:1rem}
+.section-eyebrow{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--lime-dk);margin-bottom:.5rem}
+.section-title{font-family:var(--sans);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;text-transform:uppercase;line-height:1;color:var(--black)}
+.section-num{font-size:.6rem;color:#bbb;letter-spacing:.1em;flex-shrink:0;padding-top:.2rem}
+
+/* EXPERIENCIA */
+#experiencia{background:var(--white)}
+.exp-timeline{display:flex;flex-direction:column}
+.exp-item{display:grid;grid-template-columns:160px 1fr;border-bottom:1px dashed #ccc;padding:2rem 0;position:relative}
+.exp-item::before{content:'◆';position:absolute;left:152px;top:2rem;color:var(--lime);font-size:.6rem;transform:translateX(-50%);background:var(--white);padding:0 4px}
+.exp-dates{font-size:.6rem;letter-spacing:.08em;color:var(--mid);padding-right:2rem;padding-top:.15rem;text-align:right}
+.exp-dates strong{display:block;font-weight:700;color:var(--lime-dk);margin-bottom:.2rem}
+.exp-content{padding-left:2rem}
+.exp-role{font-family:var(--sans);font-size:1.05rem;font-weight:800;text-transform:uppercase;color:var(--black);margin-bottom:.2rem}
+.exp-company{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:.8rem}
+.exp-desc{font-size:.68rem;line-height:2;color:#444;max-width:60ch}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.tag{font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gray);color:var(--black);border:1px solid #ccc;padding:.3rem .7rem;border-radius:2px}
+.tag.lime{background:var(--lime);border-color:var(--lime-dk)}
+
+/* PROYECTO DESTACADO */
+.featured-project{margin-top:1.5rem;border:2px solid var(--black);padding:1.4rem;background:#f5f3ee;position:relative}
+.featured-label{position:absolute;top:-10px;left:1rem;background:var(--lime);color:var(--black);font-size:.55rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:2px 8px}
+.featured-title{font-family:var(--sans);font-size:.95rem;font-weight:800;text-transform:uppercase;margin-bottom:.5rem}
+.featured-title em{color:var(--lime-dk);font-style:normal}
+.featured-desc{font-size:.65rem;line-height:2;color:#444;max-width:58ch}
+.featured-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
+.pill{font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--black);color:var(--lime);padding:.3rem .8rem;border-radius:2px}
+
+/* VIDEO CAM */
+.cam-video-block{margin-top:1.2rem;border:2px solid var(--black);background:#000;position:relative}
+.cam-video-label{position:absolute;top:-10px;left:1rem;background:var(--black);color:var(--lime);font-size:.55rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:2px 8px;z-index:2}
+.cam-video-block video{width:100%;display:block;max-height:340px;object-fit:contain;background:#000}
+
+/* GALERÍA */
+.galeria-section{margin-top:2rem;border:2px solid var(--lime);background:var(--black)}
+.galeria-header{background:var(--lime);padding:.7rem 1.2rem;display:flex;align-items:center;justify-content:space-between}
+.galeria-header-title{font-family:var(--sans);font-size:.7rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--black)}
+.galeria-body{padding:1rem}
+.tab-nav{display:flex;flex-wrap:wrap;border-bottom:1px solid #333;margin-bottom:1rem}
+.tab-btn{font-family:var(--mono);font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:none;border-bottom:2px solid transparent;padding:.5rem .8rem;cursor:pointer;color:#555;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.tab-btn.active{color:var(--lime);border-color:var(--lime)}
+.tab-btn:hover{color:#aaa}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* GRID MEDIA — sin caption, cuadrados justos */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px}
+.media-grid.wide{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+
+/* ITEM MEDIA con marca de agua y sin título */
+.media-item{position:relative;overflow:hidden;background:#0a0a0a;cursor:pointer;aspect-ratio:4/3;-webkit-user-select:none;user-select:none;transition:transform .2s,outline .2s}
+.media-item:hover{transform:scale(1.02);outline:2px solid var(--lime)}
+.media-item.video-item{aspect-ratio:16/9}
+
+/* MARCA DE AGUA CRUZADA */
+.media-item::before,.media-item::after{content:'PORTFOLIO · LUNGARETTI · PORTFOLIO · LUNGARETTI · PORTFOLIO · LUNGARETTI';position:absolute;z-index:6;pointer-events:none;font-family:var(--mono);font-weight:700;font-size:.38rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,241,53,.6);white-space:nowrap;width:250%;left:-30%}
+.media-item::before{top:35%;transform:rotate(-30deg)}
+.media-item::after{top:58%;transform:rotate(-30deg)}
+
+.media-item img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.media-item video{width:100%;height:100%;object-fit:cover;display:block}
+.media-item .gif-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111}
+.media-item .gif-wrap img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.media-badge{position:absolute;top:.4rem;left:.4rem;background:var(--lime);color:var(--black);font-size:.42rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 5px;z-index:7;pointer-events:none}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:1000;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox-inner{position:relative;max-width:90vw;max-height:90vh}
+.lightbox-inner img{max-width:90vw;max-height:85vh;object-fit:contain;display:block;pointer-events:none;-webkit-user-drag:none}
+.lightbox-inner video{max-width:90vw;max-height:85vh;display:block}
+.lb-wm{position:absolute;inset:0;pointer-events:none;z-index:2;display:flex;flex-direction:column;justify-content:space-evenly;align-items:center;overflow:hidden}
+.lb-wm span{font-family:var(--mono);font-weight:700;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,241,53,.35);white-space:nowrap;transform:rotate(-28deg);display:block}
+.lightbox-close{position:absolute;top:-2rem;right:0;font-family:var(--mono);font-size:.65rem;color:var(--lime);cursor:pointer;letter-spacing:.1em;background:none;border:none}
+
+/* FORMACION */
+#formacion{background:var(--black);color:var(--white)}
+#formacion .section-title{color:var(--white)}
+#formacion .section-eyebrow{color:var(--lime)}
+#formacion .section-header{border-color:#333}
+.formacion-card{border:2px solid var(--lime);padding:2rem 2.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;max-width:600px}
+.formacion-icon{width:60px;height:60px;background:var(--lime);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:1.5rem;border-radius:4px}
+.formacion-degree{font-family:var(--sans);font-size:1.1rem;font-weight:800;text-transform:uppercase;color:var(--white);line-height:1.2}
+.formacion-uni{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#666;margin-top:.3rem}
+.formacion-badge{display:inline-block;margin-top:.6rem;background:var(--lime);color:var(--black);font-size:.55rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .7rem;border-radius:2px}
+.idiomas-grid{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.idioma-item{border:2px dashed #333;padding:1rem 1.5rem;text-align:center;min-width:120px}
+.idioma-name{font-family:var(--sans);font-size:.9rem;font-weight:800;color:var(--white);text-transform:uppercase}
+.idioma-level{font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-top:.3rem}
+
+/* INTERESES */
+#intereses{background:var(--lime);color:var(--black)}
+#intereses .section-title{color:var(--black)}
+#intereses .section-eyebrow{color:rgba(0,0,0,.5)}
+#intereses .section-header{border-color:var(--black)}
+#intereses .section-num{color:rgba(0,0,0,.3)}
+.intereses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--black);border:2px solid var(--black)}
+.interes-item{background:var(--lime);padding:1.5rem 1rem;text-align:center;transition:background .15s}
+.interes-item:hover{background:var(--lime-dk)}
+.interes-icon{font-size:1.6rem;display:block;margin-bottom:.5rem}
+.interes-name{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--black)}
+
+/* CONTACTO */
+#contacto{background:var(--white)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--black)}
+.contact-left{padding:3rem;border-right:2px solid var(--black);background:var(--black);color:var(--white)}
+.contact-right{padding:3rem;background:var(--white)}
+.contact-big{font-family:var(--sans);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;text-transform:uppercase;line-height:1.1;color:var(--white);margin:1rem 0 2rem}
+.contact-big em{color:var(--lime);font-style:normal}
+.contact-list{list-style:none;display:flex;flex-direction:column}
+.contact-list li{border-bottom:1px solid #222}
+.contact-list a{display:flex;justify-content:space-between;align-items:center;padding:.9rem 0;text-decoration:none;color:#aaa;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+.contact-list a:hover{color:var(--lime)}
+.contact-list a::after{content:'↗';color:#444}
+
+/* RESEÑAS */
+.review-section-title{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:1.5rem}
+.review-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:.35rem}
+.form-group label{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid)}
+.form-group input,.form-group textarea{background:transparent;border:none;border-bottom:1.5px solid var(--black);padding:.5rem 0;font-family:var(--mono);font-size:.72rem;color:var(--black);outline:none;resize:none;width:100%;transition:border-color .2s}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--lime-dk)}
+.star-row{display:flex;gap:.4rem;margin-top:.2rem;cursor:pointer}
+.star{font-size:1.4rem;color:#ccc;transition:color .15s;line-height:1}
+.star.on{color:var(--lime)}
+.char-count{font-size:.52rem;letter-spacing:.08em;color:var(--mid);text-align:right;margin-top:.2rem}
+.review-msg{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;min-height:1rem;color:var(--lime-dk);margin-top:.3rem}
+.form-submit{font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;background:var(--black);color:var(--lime);border:2px solid var(--black);padding:.8rem 1.8rem;cursor:pointer;transition:background .2s,color .2s;width:fit-content;margin-top:.5rem}
+.form-submit:hover{background:var(--lime);color:var(--black);border-color:var(--lime)}
+.reviews-list{margin-top:2rem;border-top:2px solid var(--black)}
+.reviews-list-title{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);padding:.8rem 0 .5rem}
+.reviews-scroll{max-height:280px;overflow-y:auto}
+.reviews-scroll::-webkit-scrollbar{width:3px}
+.reviews-scroll::-webkit-scrollbar-thumb{background:var(--lime)}
+.review-card{border-bottom:1px solid var(--gray);padding:.9rem 0;animation:slideIn .3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem}
+.review-user{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
+.review-stars{color:var(--lime);font-size:.85rem}
+.review-date{font-size:.52rem;letter-spacing:.08em;color:var(--mid);margin-bottom:.35rem}
+.review-text{font-size:.66rem;line-height:1.8;color:#444}
+.reviews-empty{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1.5rem 0;text-align:center}
+
+/* FOOTER */
+footer{background:var(--black);color:#444;padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--lime)}
+footer span{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
+.footer-mark{color:var(--lime)}
+
+/* FADE */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:.8rem 1.2rem}
+  .nav-links{gap:1rem}
+  .lang-btn{font-size:.5rem;padding:.3rem .6rem}
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:5rem 1.5rem 2rem;border-right:none}
+  .hero-right{padding:1.5rem}
+  section{padding:3.5rem 1.5rem}
+  .exp-item{grid-template-columns:1fr}
+  .exp-item::before{display:none}
+  .exp-dates{text-align:left;padding:0 0 .5rem}
+  .exp-content{padding-left:0}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-left{border-right:none;border-bottom:2px solid var(--black)}
+  .media-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Lungaretti.design</a>
+  <ul class="nav-links">
+    <li><a href="#experiencia" data-es="Experiencia" data-en="Experience">Experiencia</a></li>
+    <li><a href="#formacion" data-es="Formación" data-en="Education">Formación</a></li>
+    <li><a href="#intereses" data-es="Sobre mí" data-en="About me">Sobre mí</a></li>
+    <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+    <li><button class="lang-btn" id="lang-btn" onclick="toggleLang()">🌐 EN</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left fade-up">
+    <span class="deco-star s1">✳</span>
+    <span class="deco-star s2">✦</span>
+    <p class="hero-eyebrow" data-es="Diseño Industrial · Lomas de Zamora, BA" data-en="Industrial Design · Lomas de Zamora, BA">Diseño Industrial · Lomas de Zamora, BA</p>
+    <h1 class="hero-name">Carlos<br><span>Lungaretti</span></h1>
+    <div class="hero-badge" data-es="◆ Técnico Metalmecánico · Diseño Industrial" data-en="◆ Metalworking Technician · Industrial Design">◆ Técnico Metalmecánico · Diseño Industrial</div>
+    <p class="hero-bio" data-es="+15 años en la industria metalmecánica.<br>Integro técnica y proyectualidad desde<br>la concepción hasta la materialización." data-en="+15 years in the metalworking industry.<br>I integrate technique and design thinking<br>from conception to materialization.">+15 años en la industria metalmecánica.<br>Integro técnica y proyectualidad desde<br>la concepción hasta la materialización.</p>
+    <div class="hero-contacts">
+      <div class="hero-ci"><span class="ic">✉</span>Carloslungaretti@gmail.com</div>
+      <div class="hero-ci"><span class="ic">☎</span>11-2405-4341</div>
+      <div class="hero-ci"><span class="ic">📍</span><span data-es="Lomas de Zamora, Buenos Aires" data-en="Lomas de Zamora, Buenos Aires">Lomas de Zamora, Buenos Aires</span></div>
+    </div>
+    <a href="#experiencia" class="hero-cta" data-es="Ver experiencia" data-en="View experience">Ver experiencia</a>
+  </div>
+  <div class="hero-right fade-up">
+    <div class="stats-box">
+      <span class="stats-box-label" data-es="En números" data-en="By the numbers">En números</span>
+      <div class="stats-grid">
+        <div class="stat-item"><span class="stat-num">+15</span><span class="stat-label" data-es="Años exp." data-en="Years exp.">Años exp.</span></div>
+        <div class="stat-item"><span class="stat-num">I+D</span><span class="stat-label" data-es="Investigación" data-en="Research">Investigación</span></div>
+        <div class="stat-item"><span class="stat-num">37</span><span class="stat-label" data-es="Años" data-en="Years old">Años</span></div>
+      </div>
+    </div>
+    <div class="skills-preview">
+      <p class="skills-preview-title">◆ Skills técnicos</p>
+      <div class="skill-bar-row"><span class="skill-bar-name">SolidWorks</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div><span class="skill-level" data-es="Avanzado" data-en="Advanced">Avanzado</span></div>
+      <div class="skill-bar-row"><span class="skill-bar-name">Prog. CAM</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div><span class="skill-level" data-es="Avanzado" data-en="Advanced">Avanzado</span></div>
+      <div class="skill-bar-row"><span class="skill-bar-name">AutoCAD</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div><span class="skill-level" data-es="Avanzado" data-en="Advanced">Avanzado</span></div>
+      <div class="skill-bar-row"><span class="skill-bar-name">Impresión 3D</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div><span class="skill-level" data-es="Avanzado" data-en="Advanced">Avanzado</span></div>
+      <div class="skill-bar-row"><span class="skill-bar-name">Keyshot</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div><span class="skill-level" data-es="Intermedio" data-en="Intermediate">Intermedio</span></div>
+      <div class="skill-bar-row"><span class="skill-bar-name">IA</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div><span class="skill-level" data-es="Intermedio" data-en="Intermediate">Intermedio</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">◆ SolidWorks</span><span class="ticker-item">◆ CAD/CAM</span><span class="ticker-item">◆ Impresión 3D</span><span class="ticker-item">◆ Diseño Industrial</span><span class="ticker-item">◆ Matricería</span><span class="ticker-item">◆ I+D</span><span class="ticker-item">◆ Keyshot</span><span class="ticker-item">◆ Prototipado</span><span class="ticker-item">◆ Layout Producción</span><span class="ticker-item">◆ Buenos Aires</span>
+    <span class="ticker-item">◆ SolidWorks</span><span class="ticker-item">◆ CAD/CAM</span><span class="ticker-item">◆ Impresión 3D</span><span class="ticker-item">◆ Diseño Industrial</span><span class="ticker-item">◆ Matricería</span><span class="ticker-item">◆ I+D</span><span class="ticker-item">◆ Keyshot</span><span class="ticker-item">◆ Prototipado</span><span class="ticker-item">◆ Layout Producción</span><span class="ticker-item">◆ Buenos Aires</span>
+  </div>
+</div>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="section-header fade-up">
+    <div><p class="section-eyebrow" data-es="Trayectoria profesional" data-en="Professional background">Trayectoria profesional</p><h2 class="section-title" data-es="Experiencia" data-en="Experience">Experiencia</h2></div>
+    <span class="section-num">[ 01 ]</span>
+  </div>
+  <div class="exp-timeline">
+
+    <!-- PASTALINDA -->
+    <div class="exp-item fade-up">
+      <div class="exp-dates"><strong>2021 — Actual</strong>Oficina Técnica<br>Matricería</div>
+      <div class="exp-content">
+        <p class="exp-role" data-es="Oficina Técnica — Matricería" data-en="Technical Office — Tooling">Oficina Técnica — Matricería</p>
+        <p class="exp-company">Pastalinda S.A.</p>
+        <p class="exp-desc" data-es="Diseño de productos e I+D. Desarrollo de moldes para inyección de polímeros y moldes para fundición de aluminio. Matricería para embutido y corte de láminas. Programación CAD/CAM, prototipado por impresión 3D y renders fotorrealistas. Relevamiento y mejora de layout de línea de producción." data-en="Product design and R&D. Development of polymer injection molds and aluminum casting molds. Tooling for sheet metal stamping and cutting. CAD/CAM programming, 3D printing prototyping and photorealistic renders. Survey and improvement of production line layout.">Diseño de productos e I+D. Desarrollo de moldes para inyección de polímeros y moldes para fundición de aluminio. Matricería para embutido y corte de láminas. Programación CAD/CAM, prototipado por impresión 3D y renders fotorrealistas. Relevamiento y mejora de layout de línea de producción.</p>
+        <div class="exp-tags">
+          <span class="tag lime">SolidWorks</span><span class="tag lime">CAD/CAM</span><span class="tag lime">Impresión 3D</span>
+          <span class="tag">I+D</span><span class="tag">Keyshot</span><span class="tag">Moldes Inyección</span>
+          <span class="tag">Fundición Aluminio</span><span class="tag">Layout Producción</span>
+        </div>
+
+        <!-- PROYECTO DESTACADO -->
+        <div class="featured-project">
+          <span class="featured-label" data-es="★ Proyecto destacado" data-en="★ Featured project">★ Proyecto destacado</span>
+          <p class="featured-title">Sobadora Industrial <em>PastaPro 300</em></p>
+          <p class="featured-desc" data-es="Desarrollo integral de nueva máquina sobadora con más de 32 piezas de diseño propio. El proyecto abarcó mecánica interior, forma exterior, planificación de materias primas, análisis de costos, packaging, postprocesos y armado en línea de producción." data-en="Full development of a new dough sheeter with over 32 custom-designed parts. The project covered internal mechanics, exterior form, raw material planning, cost analysis, packaging, surface finishing and production line assembly.">Desarrollo integral de nueva máquina sobadora con más de 32 piezas de diseño propio. El proyecto abarcó mecánica interior, forma exterior, planificación de materias primas, análisis de costos, packaging, postprocesos y armado en línea de producción.</p>
+          <div class="featured-pills">
+            <span class="pill">+32 piezas</span><span class="pill">Mecánica</span><span class="pill">Diseño de forma</span>
+            <span class="pill">Packaging</span><span class="pill">Costos</span><span class="pill">Producción</span>
+          </div>
+        </div>
+
+        <!-- VIDEO CAM -->
+        <div class="cam-video-block" style="margin-top:1.5rem">
+          <span class="cam-video-label">▶ CAM — TopSolid 7</span>
+          <video controls preload="metadata" controlslist="nodownload nofullscreen" oncontextmenu="return false">
+            <source src="cam_c.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- GALERÍA -->
+        <div class="galeria-section" style="margin-top:1.5rem">
+          <div class="galeria-header">
+            <span class="galeria-header-title" data-es="◆ Galería de proyectos" data-en="◆ Project gallery">◆ Galería de proyectos</span>
+          </div>
+          <div class="galeria-body">
+            <div class="tab-nav">
+              <button class="tab-btn active" onclick="showTab(this,'moldes')" data-es="Matricería" data-en="Tooling">Matricería</button>
+              <button class="tab-btn" onclick="showTab(this,'renders')" data-es="Renders 3D" data-en="3D Renders">Renders 3D</button>
+              <button class="tab-btn" onclick="showTab(this,'sim')" data-es="Simulación" data-en="Simulation">Simulación</button>
+              <button class="tab-btn" onclick="showTab(this,'stand')" data-es="Stand" data-en="Exhibition Stand">Stand</button>
+              <button class="tab-btn" onclick="showTab(this,'proceso')" data-es="Proceso / CAM" data-en="Process / CAM">Proceso / CAM</button>
+              <button class="tab-btn" onclick="showTab(this,'taller')" data-es="Taller" data-en="Workshop">Taller</button>
+            </div>
+
+            <!-- MATRICERÍA: img1, img2, img6, img7, ultimo2, ultimo3, ultimo4, planos, molde, nueva_matriz -->
+            <div class="tab-panel active" id="tab-moldes">
+              <div class="media-grid">
+                <div class="media-item" onclick="openLightbox('img1.jpeg','img')"><span class="media-badge">Foto</span><img src="img1.jpeg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('img2.jpeg','img')"><span class="media-badge">Foto</span><img src="img2.jpeg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('img6.jpeg','img')"><span class="media-badge">Foto</span><img src="img6.jpeg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('img7.jpeg','img')"><span class="media-badge">Foto</span><img src="img7.jpeg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('ultimo2.jpg','img')"><span class="media-badge">Foto</span><img src="ultimo2.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('ultimo3.jpg','img')"><span class="media-badge">Foto</span><img src="ultimo3.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('ultimo4.jpg','img')"><span class="media-badge">Foto</span><img src="ultimo4.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('1_32.jpg','img')"><span class="media-badge">Plano</span><img src="1_32.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('1_40.jpg','img')"><span class="media-badge">Plano</span><img src="1_40.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('1_103.jpg','img')"><span class="media-badge">Plano</span><img src="1_103.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('1_104.jpg','img')"><span class="media-badge">Plano</span><img src="1_104.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('1_119.jpg','img')"><span class="media-badge">Plano</span><img src="1_119.jpg" alt="" loading="lazy"></div>
+                <div class="media-item video-item"><span class="media-badge">Video</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="molde.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">Video</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="nueva_matriz.mp4"></video></div>
+              </div>
+            </div>
+
+            <!-- RENDERS 3D: catalogo, img130, img130b, tif32, accesorio, conjunto, sw_c -->
+            <div class="tab-panel" id="tab-renders">
+              <div class="media-grid wide">
+                <div class="media-item" onclick="openLightbox('catalogo.png','img')"><span class="media-badge">Render</span><img src="catalogo.png" alt="" loading="lazy" style="object-fit:contain;background:#111"></div>
+                <div class="media-item" onclick="openLightbox('img130.jpg','img')"><span class="media-badge">Render</span><img src="img130.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('img130b.jpg','img')"><span class="media-badge">Render</span><img src="img130b.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('tif32.jpg','img')"><span class="media-badge">Render</span><img src="tif32.jpg" alt="" loading="lazy"></div>
+                <div class="media-item video-item"><span class="media-badge">Video</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="accesorio.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">Video</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="conjunto.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">SW</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="sw_c.mp4"></video></div>
+              </div>
+            </div>
+
+            <!-- SIMULACIÓN: anim1.gif, anim2.gif, 141931, 141932, colada, vid_wsp -->
+            <div class="tab-panel" id="tab-sim">
+              <div class="media-grid wide">
+                <div class="media-item"><span class="media-badge">GIF</span><div class="gif-wrap"><img src="anim1.gif" alt="" loading="lazy"></div></div>
+                <div class="media-item"><span class="media-badge">GIF</span><div class="gif-wrap"><img src="anim2.gif" alt="" loading="lazy"></div></div>
+                <div class="media-item" onclick="openLightbox('20250424_141931.jpg','img')"><span class="media-badge">Sim</span><img src="20250424_141931.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('20250424_141932.jpg','img')"><span class="media-badge">Sim</span><img src="20250424_141932.jpg" alt="" loading="lazy"></div>
+                <div class="media-item video-item"><span class="media-badge">Video</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="colada_c.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">Video</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="vid_wsp.mp4"></video></div>
+              </div>
+            </div>
+
+            <!-- STAND: 20240509, img6, img7, ultimo4, vid2 -->
+            <div class="tab-panel" id="tab-stand">
+              <div class="media-grid wide">
+                <div class="media-item" onclick="openLightbox('20240509_140721.jpg','img')"><span class="media-badge">Render</span><img src="20240509_140721.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('img6.jpeg','img')"><span class="media-badge">Render</span><img src="img6.jpeg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('img7.jpeg','img')"><span class="media-badge">Render</span><img src="img7.jpeg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('ultimo4.jpg','img')"><span class="media-badge">Render</span><img src="ultimo4.jpg" alt="" loading="lazy"></div>
+                <div class="media-item video-item"><span class="media-badge">Video</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="vid2.mp4"></video></div>
+              </div>
+            </div>
+
+            <!-- PROCESO: cam_c, new_mp4_1_c, abr25a, abr25b, may24 -->
+            <div class="tab-panel" id="tab-proceso">
+              <div class="media-grid wide">
+                <div class="media-item video-item"><span class="media-badge">CAM</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="cam_c.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">CNC</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="new_mp4_1_c.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">Proceso</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="vid_abr25a_c.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">Proceso</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="vid_abr25b_c.mp4"></video></div>
+                <div class="media-item video-item"><span class="media-badge">Proceso</span><video controls preload="metadata" controlslist="nodownload" oncontextmenu="return false" src="vid_may24_c.mp4"></video></div>
+              </div>
+            </div>
+
+            <!-- TALLER: foto_taller, 141931, 141932 -->
+            <div class="tab-panel" id="tab-taller">
+              <div class="media-grid">
+                <div class="media-item" onclick="openLightbox('foto_taller.jpg','img')"><span class="media-badge">Foto</span><img src="foto_taller.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('20250424_141931.jpg','img')"><span class="media-badge">Foto</span><img src="20250424_141931.jpg" alt="" loading="lazy"></div>
+                <div class="media-item" onclick="openLightbox('20250424_141932.jpg','img')"><span class="media-badge">Foto</span><img src="20250424_141932.jpg" alt="" loading="lazy"></div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- fin galeria -->
+      </div>
+    </div><!-- fin PASTALINDA -->
+
+    <!-- MATRICERO -->
+    <div class="exp-item fade-up">
+      <div class="exp-dates"><strong>2015 — 2020</strong>Matricero</div>
+      <div class="exp-content">
+        <p class="exp-role" data-es="Matricero" data-en="Toolmaker">Matricero</p>
+        <p class="exp-company">Industria Mercurio Papaianni S.A.</p>
+        <p class="exp-desc" data-es="Elaboración de matricería para estampado en frío/caliente de tornillos, bulones, remaches y tuercas. Interpretación de planos técnicos, manejo de torno paralelo, fresa, limadora, cepillo, rectificadora, horno para temple y electroerosionadora por hilo." data-en="Production of tooling for cold/hot stamping of screws, bolts, rivets and nuts. Technical drawing interpretation, lathe, milling, grinding, wire EDM and heat treatment.">Elaboración de matricería para estampado en frío/caliente de tornillos, bulones, remaches y tuercas. Interpretación de planos técnicos, manejo de torno paralelo, fresa, limadora, cepillo, rectificadora, horno para temple y electroerosionadora por hilo.</p>
+        <div class="exp-tags"><span class="tag">Torno</span><span class="tag">Fresadora</span><span class="tag">Rectificadora</span><span class="tag">Electroerosión por Hilo</span><span class="tag">Temple</span></div>
+      </div>
+    </div>
+
+    <!-- ROSCADOR -->
+    <div class="exp-item fade-up">
+      <div class="exp-dates"><strong>2011 — 2015</strong>Op. Roscador</div>
+      <div class="exp-content">
+        <p class="exp-role" data-es="Operador Roscador" data-en="Thread Rolling Operator">Operador Roscador</p>
+        <p class="exp-company">Industria Mercurio Papaianni S.A.</p>
+        <p class="exp-desc" data-es="Mantenimiento, puesta a punto y producción en máquinas laminadoras de rosca con rodillos y peines planos." data-en="Maintenance, setup and production on thread rolling machines with rollers and flat dies.">Mantenimiento, puesta a punto y producción en máquinas laminadoras de rosca con rodillos y peines planos.</p>
+      </div>
+    </div>
+
+    <!-- ESTAMPADOR -->
+    <div class="exp-item fade-up">
+      <div class="exp-dates"><strong>2006 — 2011</strong>Op. Estampador</div>
+      <div class="exp-content">
+        <p class="exp-role" data-es="Operador Estampador" data-en="Stamping Operator">Operador Estampador</p>
+        <p class="exp-company">Industria Mercurio Papaianni S.A.</p>
+        <p class="exp-desc" data-es="Puesta a punto y producción en máquinas estampadoras en frío de bulones combinadas hasta 5 matrices, despunte y rosca." data-en="Setup and production on cold bolt stamping machines with up to 5 dies, trimming and threading.">Puesta a punto y producción en máquinas estampadoras en frío de bulones combinadas hasta 5 matrices, despunte y rosca.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FORMACION -->
+<section id="formacion">
+  <div class="section-header fade-up">
+    <div><p class="section-eyebrow" data-es="Educación" data-en="Education">Educación</p><h2 class="section-title" data-es="Formación" data-en="Education">Formación</h2></div>
+    <span class="section-num" style="color:#555">[ 02 ]</span>
+  </div>
+  <div class="formacion-card fade-up">
+    <div class="formacion-icon">🎓</div>
+    <div>
+      <p class="formacion-degree" data-es="Licenciatura en Diseño Industrial" data-en="Bachelor's in Industrial Design">Licenciatura en<br>Diseño Industrial</p>
+      <p class="formacion-uni">Universidad Nacional de Lanús</p>
+      <span class="formacion-badge" data-es="En curso" data-en="In progress">En curso</span>
+    </div>
+  </div>
+  <div class="idiomas-grid fade-up">
+    <div class="idioma-item"><p class="idioma-name" data-es="Español" data-en="Spanish">Español</p><p class="idioma-level" data-es="Nativo" data-en="Native">Nativo</p></div>
+    <div class="idioma-item"><p class="idioma-name" data-es="Inglés" data-en="English">Inglés</p><p class="idioma-level" data-es="Técnico básico" data-en="Basic technical">Técnico básico</p></div>
+  </div>
+</section>
+
+<!-- INTERESES -->
+<section id="intereses">
+  <div class="section-header fade-up">
+    <div><p class="section-eyebrow" data-es="Más sobre mí" data-en="More about me">Más sobre mí</p><h2 class="section-title" data-es="Intereses" data-en="Interests">Intereses</h2></div>
+    <span class="section-num">[ 03 ]</span>
+  </div>
+  <div class="intereses-grid fade-up">
+    <div class="interes-item"><span class="interes-icon">🚴</span><p class="interes-name" data-es="Ciclismo" data-en="Cycling">Ciclismo</p></div>
+    <div class="interes-item"><span class="interes-icon">🧘</span><p class="interes-name" data-es="Yoga" data-en="Yoga">Yoga</p></div>
+    <div class="interes-item"><span class="interes-icon">🌿</span><p class="interes-name" data-es="Naturaleza" data-en="Nature">Naturaleza</p></div>
+    <div class="interes-item"><span class="interes-icon">🔩</span><p class="interes-name" data-es="Manufactura" data-en="Manufacturing">Manufactura</p></div>
+    <div class="interes-item"><span class="interes-icon">🤖</span><p class="interes-name" data-es="Tecnología" data-en="Technology">Tecnología</p></div>
+    <div class="interes-item"><span class="interes-icon">📐</span><p class="interes-name" data-es="Diseño" data-en="Design">Diseño</p></div>
+  </div>
+</section>
+
+<!-- CONTACTO + RESEÑAS -->
+<section id="contacto">
+  <div class="section-header fade-up">
+    <div><p class="section-eyebrow" data-es="Hablemos" data-en="Let's talk">Hablemos</p><h2 class="section-title" data-es="Contacto" data-en="Contact">Contacto</h2></div>
+    <span class="section-num">[ 04 ]</span>
+  </div>
+  <div class="contact-grid fade-up">
+    <div class="contact-left">
+      <p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#555" data-es="Disponible para proyectos" data-en="Available for projects">Disponible para proyectos</p>
+      <p class="contact-big">¿Tenés un<br>proyecto <em data-es="técnico?" data-en="technical project?">técnico?</em></p>
+      <ul class="contact-list">
+        <li><a href="mailto:Carloslungaretti@gmail.com">Carloslungaretti@gmail.com</a></li>
+        <li><a href="tel:+5491124054341">11-2405-4341</a></li>
+        <li><a href="#" data-es="Descargar CV" data-en="Download CV">Descargar CV</a></li>
+      </ul>
+    </div>
+    <div class="contact-right">
+      <p class="review-section-title" data-es="◆ Dejá tu reseña" data-en="◆ Leave a review">◆ Dejá tu reseña</p>
+      <div class="review-form">
+        <div class="form-group">
+          <label data-es="Usuario" data-en="Username">Usuario</label>
+          <input type="text" id="rev-user" placeholder="Tu nombre o @usuario" maxlength="30">
+        </div>
+        <div class="form-group">
+          <label data-es="Calificación" data-en="Rating">Calificación</label>
+          <div class="star-row" id="star-row">
+            <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span>
+            <span class="star" data-v="3">★</span><span class="star" data-v="4">★</span>
+            <span class="star" data-v="5">★</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-es="Comentario" data-en="Comment">Comentario</label>
+          <textarea id="rev-text" rows="3" placeholder="¿Qué te pareció el portfolio?" maxlength="280"></textarea>
+          <span class="char-count"><span id="char-count">0</span> / 280</span>
+        </div>
+        <button class="form-submit" onclick="submitReview()" data-es="Publicar reseña →" data-en="Post review →">Publicar reseña →</button>
+        <p class="review-msg" id="review-msg"></p>
+      </div>
+      <div class="reviews-list">
+        <p class="reviews-list-title" data-es="◆ Reseñas del portfolio" data-en="◆ Portfolio reviews">◆ Reseñas del portfolio</p>
+        <div class="reviews-scroll" id="reviews-scroll">
+          <p class="reviews-empty" id="reviews-empty" data-es="Todavía no hay reseñas. ¡Sé el primero!" data-en="No reviews yet. Be the first!">Todavía no hay reseñas. ¡Sé el primero!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 <span class="footer-mark">Carlos Lungaretti</span></span>
+  <span>Lomas de Zamora, Buenos Aires</span>
+  <span>Space Mono + <span class="footer-mark">Nunito</span></span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">[ cerrar × ]</button>
+    <div class="lb-wm">
+      <span>PORTFOLIO · CARLOS LUNGARETTI · PORTFOLIO · CARLOS LUNGARETTI</span>
+      <span>PORTFOLIO · CARLOS LUNGARETTI · PORTFOLIO · CARLOS LUNGARETTI</span>
+      <span>PORTFOLIO · CARLOS LUNGARETTI · PORTFOLIO · CARLOS LUNGARETTI</span>
+    </div>
+    <img id="lb-img" src="" alt="" style="display:none">
+    <video id="lb-video" controls controlslist="nodownload" oncontextmenu="return false" style="display:none"></video>
+  </div>
+</div>
+
+<script>
+/* ── PROTECCIÓN ── */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('dragstart',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&['s','u','a'].includes(e.key.toLowerCase()))e.preventDefault();
+});
+
+/* ── TRADUCCIÓN ── */
+let lang = 'es';
+function toggleLang(){
+  lang = lang==='es'?'en':'es';
+  document.getElementById('lang-btn').textContent = lang==='es'?'🌐 EN':'🌐 ES';
+  document.querySelectorAll('[data-es]').forEach(el=>{
+    const val = el.getAttribute('data-'+lang);
+    if(!val)return;
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder=val;
+    else el.innerHTML=val;
+  });
+}
+
+/* ── TABS ── */
+function showTab(btn,id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── LIGHTBOX ── */
+function openLightbox(src,type){
+  const lb=document.getElementById('lightbox');
+  const img=document.getElementById('lb-img');
+  const vid=document.getElementById('lb-video');
+  if(type==='img'){img.src=src;img.style.display='block';vid.style.display='none';vid.pause();}
+  else{vid.src=src;vid.style.display='block';img.style.display='none';}
+  lb.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  const v=document.getElementById('lb-video');v.pause();v.src='';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+/* ── ESTRELLAS ── */
+let selStars=0;
+document.querySelectorAll('.star').forEach(s=>{
+  s.addEventListener('mouseover',()=>{
+    const v=+s.dataset.v;
+    document.querySelectorAll('.star').forEach(x=>x.classList.toggle('on',+x.dataset.v<=v));
+  });
+  s.addEventListener('mouseout',()=>{
+    document.querySelectorAll('.star').forEach(x=>x.classList.toggle('on',+x.dataset.v<=selStars));
+  });
+  s.addEventListener('click',()=>{
+    selStars=+s.dataset.v;
+    document.querySelectorAll('.star').forEach(x=>x.classList.toggle('on',+x.dataset.v<=selStars));
+  });
+});
+
+/* ── CHAR COUNT ── */
+document.getElementById('rev-text').addEventListener('input',function(){
+  document.getElementById('char-count').textContent=this.value.length;
+});
+
+/* ── RESEÑAS localStorage ── */
+const KEY='cl_reviews_v2';
+function getReviews(){try{return JSON.parse(localStorage.getItem(KEY))||[];}catch{return[];}}
+function saveReviews(r){try{localStorage.setItem(KEY,JSON.stringify(r));}catch{}}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function renderReviews(){
+  const reviews=getReviews();
+  const scroll=document.getElementById('reviews-scroll');
+  const empty=document.getElementById('reviews-empty');
+  scroll.querySelectorAll('.review-card').forEach(c=>c.remove());
+  if(!reviews.length){empty.style.display='block';return;}
+  empty.style.display='none';
+  reviews.slice().reverse().forEach(r=>{
+    const d=document.createElement('div');
+    d.className='review-card';
+    d.innerHTML=`<div class="review-top"><span class="review-user">${esc(r.user)}</span><span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span></div><p class="review-date">${r.date}</p><p class="review-text">${esc(r.text)}</p>`;
+    scroll.appendChild(d);
+  });
+}
+
+function submitReview(){
+  const user=document.getElementById('rev-user').value.trim();
+  const text=document.getElementById('rev-text').value.trim();
+  const msg=document.getElementById('review-msg');
+  if(!user){msg.textContent='◆ Ingresá un nombre.';return;}
+  if(!selStars){msg.textContent='◆ Seleccioná una calificación.';return;}
+  if(!text){msg.textContent='◆ Escribí un comentario.';return;}
+  const date=new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'});
+  const reviews=getReviews();
+  reviews.push({user,stars:selStars,text,date});
+  saveReviews(reviews);
+  renderReviews();
+  document.getElementById('rev-user').value='';
+  document.getElementById('rev-text').value='';
+  document.getElementById('char-count').textContent='0';
+  selStars=0;
+  document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));
+  msg.textContent='✓ ¡Gracias por tu reseña!';
+  setTimeout(()=>msg.textContent='',3000);
+}
+
+/* ── FADE IN ── */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80);});
+},{threshold:0.06});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+/* ── INIT ── */
+renderReviews();
+</script>
+</body>
+</html>
